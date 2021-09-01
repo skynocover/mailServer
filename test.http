@@ -1,5 +1,5 @@
-# @url=https://message.credot.ml
-@url=http://localhost:3000
+@url=https://mail-server.vercel.app
+# @url=http://localhost:3000
 
 ################################
 POST {{url}}/api/mail
@@ -14,8 +14,5 @@ Content-Type: application/json
     "checksum":"3800979489f36f5003a17991f393b971ba95c11cffb0408b773789f4611e2c54"
 }
 
-##########
-GET {{url}}/api/mtk
-
 #########
-GET {{url}}/api/message?service=test&durationStart=2021-07-31T16:00:00.000Z&durationEnd=2021-08-31T16:00:00.000Z&checksum=0b72dccd2105d9db50c833cec8e562c98f3c46466675803d2117f5a7146a474e&limit=2&offset=2
+GET {{url}}/api/mail?service=test&durationStart=2021-08-01T16:00:00.000Z&durationEnd=2021-09-30T16:00:00.000Z&checksum=60e04ba6033ffdbb5352e4ca4fbb0b4c495908f95a0c62d10dc2bebfda04425e
