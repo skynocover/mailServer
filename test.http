@@ -2,14 +2,16 @@
 @url=http://localhost:3000
 
 ################################
-POST {{url}}/api/message
+POST {{url}}/api/mail
 Content-Type: application/json
 
 {
     "service":"test",
-    "phone":"0921771865",
-    "message":"testmessage",
-    "checksum":"04895a1690b3342a30503e42fc47cf275c4279e4679af3562c10f4b312a537ea"
+    "subject":"testsub",
+    "html":"<ul><li>list1</li><li>list2</li><li>list3</li></ul>",
+    "target":["skynocover@Gmail.com"],
+    "datetime":"2021-08-31T16:51:19.808Z",
+    "checksum":"3800979489f36f5003a17991f393b971ba95c11cffb0408b773789f4611e2c54"
 }
 
 ##########

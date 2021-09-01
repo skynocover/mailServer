@@ -16,21 +16,10 @@ import { AddService } from '../modals/AddService';
 const Home = ({ services, error }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const appCtx = React.useContext(AppContext);
   const [dataSource, setDataSource] = React.useState<Service[]>([]);
-  const [amount, setAmount] = React.useState<number>(0);
 
   const router = useRouter();
 
-  const init = async () => {
-    const data = await appCtx.fetch('get', '/api/mtk');
-    if (data) {
-      console.log(data);
-      if (data.Error) {
-        Notification.add('error', data.Error);
-      } else if (data.AccountPoint) {
-        setAmount(+data.AccountPoint);
-      }
-    }
-  };
+  const init = async () => {};
 
   React.useEffect(() => {
     if (error) {
@@ -159,11 +148,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
       };
     }
 
-    // const services = await prisma.service.findMany({
-    //   select: { id: true, code: true, name: true, note: true, enable: true, secret: true },
-    // });
+    const services = await prisma.service.findMany({
+      select: { id: true, code: true, name: true, note: true, enable: true, secret: true },
+    });
+    // const services: any[] = [];
 
-    return { props: {} };
+    return { props: { services } };
   } catch (error) {
     console.log(`get home page fail, err: ${error.message}`);
     return { props: { error: error.message } };

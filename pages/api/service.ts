@@ -61,6 +61,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         .update(`${Math.random()}`)
         .digest('hex')
         .substring(0, 30);
+
       await prisma.service.create({ data: { code, name, note, secret } });
       res.json(Resp.success);
     } catch (error) {

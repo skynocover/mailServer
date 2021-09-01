@@ -11,6 +11,7 @@ import { getSession } from 'next-auth/client';
 import { prisma } from '../database/db';
 import dayjs from 'dayjs';
 import moment, { Moment } from 'moment';
+import { MailInfo } from '../modals/MailInfo';
 
 import axios from 'axios';
 // import querystring from 'querystring';
@@ -51,7 +52,7 @@ export default function Service({ error }: InferGetServerSidePropsType<typeof ge
       durationEnd: timeRange[1].toISOString(),
     });
 
-    const data = await appCtx.fetch('get', `/api/message?${query}`);
+    const data = await appCtx.fetch('get', `/api/mail?${query}`);
     if (data) {
       setDataSource(data.messages);
       setTotal(data.count);
@@ -71,14 +72,25 @@ export default function Service({ error }: InferGetServerSidePropsType<typeof ge
 
   const columns: ColumnsType<messageList> = [
     {
-      title: '手機號碼',
+      title: '目標',
       align: 'center',
-      dataIndex: 'phone',
+      render: (item) => <>{item.target.join(',')}</>,
     },
     {
-      title: '簡訊內容',
+      title: '主題',
       align: 'center',
-      dataIndex: 'message',
+      dataIndex: 'subject',
+    },
+    {
+      title: 'mail內容',
+      align: 'center',
+      render: (item) => (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: item.text ? item.text : item.html,
+          }}
+        ></div>
+      ),
     },
     {
       title: '錯誤訊息',
@@ -90,11 +102,19 @@ export default function Service({ error }: InferGetServerSidePropsType<typeof ge
       align: 'center',
       dataIndex: 'createdAt',
     },
+    {
+      title: '',
+      align: 'center',
+      render: (item) => (
+        <antd.Button type="primary" onClick={() => appCtx.setModal(<MailInfo id={item.id} />)}>
+          發送資訊
+        </antd.Button>
+      ),
+    },
   ];
 
-  const selectTime = (_: any, dateStrings: [string, string]) => {
+  const selectTime = (_: any, dateStrings: [string, string]) =>
     setTimeRange([moment(dateStrings[0]), moment(dateStrings[1])]);
-  };
 
   const content = (
     <>

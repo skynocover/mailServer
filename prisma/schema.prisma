@@ -8,23 +8,37 @@ generator client {
     previewFeatures = ["mongoDb"]
 }
 
-model MessageList {
-    id           String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
-    serviceId    String   @db.ObjectId
-    service      Service  @relation(fields: [serviceId], references: [id])
-    phone        String
-    message      String
+model MailList {
+    id           String     @id @default(dbgenerated()) @map("_id") @db.ObjectId
+    serviceId    String     @db.ObjectId
+    service      Service    @relation(fields: [serviceId], references: [id])
+    target       String[]
+    subject      String
+    text         String?
+    html         String?
     errorMessage String?
-    createdAt    DateTime @default(now())
+    createdAt    DateTime   @default(now())
+    MailInfo     MailInfo[]
+}
+
+model MailInfo {
+    id         String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
+    mail       MailList @relation(fields: [mailListId], references: [id])
+    mailListId String   @db.ObjectId
+    accepted   String[]
+    rejected   String[]
+    response   String
+    envelope   String
+    messageId  String
 }
 
 model Service {
-    id          String        @id @default(dbgenerated()) @map("_id") @db.ObjectId
-    code        String        @unique
-    name        String
-    note        String?
-    secret      String
-    enable      Boolean       @default(true)
-    createdAt   DateTime      @default(now())
-    MessageList MessageList[]
+    id        String     @id @default(dbgenerated()) @map("_id") @db.ObjectId
+    code      String     @unique
+    name      String
+    note      String?
+    secret    String
+    enable    Boolean    @default(true)
+    createdAt DateTime   @default(now())
+    MailList  MailList[]
 }

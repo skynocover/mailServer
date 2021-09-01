@@ -35,6 +35,11 @@ export const Resp = {
     errorMessage: 'checksum error',
   },
 
+  datetimeExpire: {
+    errorCode: 1004,
+    errorMessage: 'datetime expire',
+  },
+
   // DB Fail
   sqlExecFail: {
     errorCode: 2000,

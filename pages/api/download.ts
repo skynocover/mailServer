@@ -53,12 +53,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
 
-      const messagesList = await prisma.messageList.findMany({ where });
-      const messages = messagesList.map((message) => {
+      const maillist = await prisma.mailList.findMany({ where });
+      const messages = maillist.map((message) => {
         return [
           message.id,
-          message.phone,
-          message.message,
+          message.text,
           message.errorMessage || '',
           dayjs(message.createdAt).format('YYYY-MM-DDTHH:mm:ss'),
         ];
