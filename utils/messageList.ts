@@ -7,7 +7,7 @@ export const checkDuration = (
   id: string,
   durationStart: any,
   durationEnd: any,
-): Prisma.MessageListWhereInput | null => {
+): Prisma.MailListWhereInput | null => {
   if (typeof durationStart !== 'string' || typeof durationEnd !== 'string') {
     return null;
   }
@@ -15,7 +15,7 @@ export const checkDuration = (
     return null;
   }
 
-  let where: Prisma.MessageListWhereInput = {
+  let where: Prisma.MailListWhereInput = {
     serviceId: id,
     AND: [
       {
