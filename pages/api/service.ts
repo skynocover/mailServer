@@ -40,7 +40,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       await prisma.service.update({ data: { secret }, where: { id } });
       res.json(Resp.success);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
       res.json({ error: error.message, ...Resp.sqlExecFail });
     }
@@ -64,7 +64,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       await prisma.service.create({ data: { code, name, note, secret } });
       res.json(Resp.success);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
       res.json({ error: error.message, ...Resp.sqlExecFail });
     }
@@ -98,7 +98,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       res.json(Resp.success);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
       res.json({ error: error.message, ...Resp.sqlExecFail });
     }

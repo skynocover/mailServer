@@ -76,7 +76,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       );
 
       res.send(buff);
-    } catch (error) {
+    } catch (error: any) {
       credotlog.log('Err', `post message fail, error: ${error.message}`);
       res.json({ ...Resp.commandExecFail, error: error.message });
     }

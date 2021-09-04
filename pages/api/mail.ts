@@ -108,7 +108,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       res.json({ ...Resp.success, messages, count });
-    } catch (error) {
+    } catch (error: any) {
       credotlog.log('Err', `post message fail, error: ${error.message}`);
       res.json({ ...Resp.commandExecFail, error: error.message });
     }
@@ -207,7 +207,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       res.json(Resp.success);
-    } catch (error) {
+    } catch (error: any) {
       credotlog.log('Err', `post message fail, error: ${error.message}`);
       res.json({ ...Resp.commandExecFail, error: error.message });
     }

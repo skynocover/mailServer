@@ -151,10 +151,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
     const services = await prisma.service.findMany({
       select: { id: true, code: true, name: true, note: true, enable: true, secret: true },
     });
-    // const services: any[] = [];
 
     return { props: { services } };
-  } catch (error) {
+  } catch (error: any) {
     console.log(`get home page fail, err: ${error.message}`);
     return { props: { error: error.message } };
   }

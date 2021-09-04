@@ -1,5 +1,5 @@
-@url=https://mail-server.vercel.app
-# @url=http://localhost:3000
+# @url=https://mail-server.vercel.app
+@url=http://localhost:3000
 
 ################################
 POST {{url}}/api/mail
@@ -10,8 +10,21 @@ Content-Type: application/json
     "subject":"testsub",
     "html":"<ul><li>list1</li><li>list2</li><li>list3</li></ul>",
     "target":["skynocover@Gmail.com"],
-    "datetime":"2021-08-31T16:51:19.808Z",
+    "datetime":"2021-09-06T00:51:19.808Z",
     "checksum":"3800979489f36f5003a17991f393b971ba95c11cffb0408b773789f4611e2c54"
+}
+
+################################
+POST {{url}}/api/mail
+Content-Type: application/json
+
+{
+    "service":"test",
+    "subject":"testsub",
+    "text":"test",
+    "target":["skynocover@Gmail.com"],
+    "datetime":"2021-09-06T00:51:19.808Z",
+    "checksum":"02224abf1349c4864c12e9b8abb5fe7de69689485f42dd6dbee82ac3ff62ae46"
 }
 
 #########
